@@ -16,11 +16,11 @@ apic_password = "C1sc0123"
 base_url, cookies = loginApic(apic_ip, apic_username, apic_password)
 
 # Build up 
-vrf1_url = base_url + 'node/mo/uni/tn-kai/ctx-vrf1.json'
+vrf1_url = base_url + 'node/mo/uni/tn-demo/ctx-vrf1.json'
 
 # Payload to create vzany provider
 enforced = json.dumps({
-    "fvCtx": {"attributes": {"dn": "uni/tn-kai/ctx-vrf1", "pcEnfPref": "enforced"}, "children": []}
+    "fvCtx": {"attributes": {"dn": "uni/tn-demo/ctx-vrf1", "pcEnfPref": "enforced"}, "children": []}
 })
 
 enforcedCreator = requests.post(

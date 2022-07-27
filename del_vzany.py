@@ -14,7 +14,7 @@ apic_password = "C1sc0123"
 base_url, cookies = loginApic(apic_ip, apic_username, apic_password)
 
 # Build up vzany_url
-vzany_url = base_url + 'node/mo/uni/tn-kai/ctx-vrf1/any.json'
+vzany_url = base_url + 'node/mo/uni/tn-demo/ctx-vrf1/any.json'
 
 # Payload to delete vzany provider
 provVzany = json.dumps({
