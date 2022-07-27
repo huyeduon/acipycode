@@ -1,0 +1,48 @@
+#!/usr/local/bin/python3
+from loginApic import loginApic
+from pprint import pprint
+import requests
+import json
+import urllib3
+import time
+urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
+
+apic_ip = "10.138.159.34"
+apic_username = "admin"
+apic_password = "C1sc0123"
+
+
+# Retrieve base_url and cookies
+base_url, cookies = loginApic(apic_ip, apic_username, apic_password)
+
+# Build up vzany_url
+vzany_url = base_url + 'node/mo/uni/tn-kai/ctx-vrf1/any.json'
+
+# Payload to create vzany provider
+provVzany = json.dumps({
+    "vzRsAnyToProv": {
+        "attributes": {
+            "tnVzBrCPName": "default",
+            "status": "created"
+        }
+    }
+})
+
+# Payload to create vzany consumer
+consVzany = json.dumps({
+    "vzRsAnyToCons": {
+        "attributes": {
+            "tnVzBrCPName": "default",
+            "status": "created"
+        }
+    }
+})
+
+provVzanyCreator = requests.post(
+    vzany_url, cookies=cookies, data=provVzany, verify=False)
+print('vzany contract provider side applied')
+time.sleep(1)
+
+consVzanyCreator = requests.post(
+    vzany_url, cookies=cookies, data=consVzany, verify=False)
+print('vzany contract consumer side applied')
